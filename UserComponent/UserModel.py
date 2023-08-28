@@ -18,3 +18,6 @@ class UserModel(Base):
         self.password = password
         self.email = email
         self.role = role
+
+    def user_object(self):
+        return f"User ID: {self.id}, \nUsername: {self.username}, \nPassword: {self.password}, \nEmail: {self.email}, \nRole: {self.role}"

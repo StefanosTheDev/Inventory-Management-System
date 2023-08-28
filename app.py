@@ -24,10 +24,12 @@ def main():
 
             if is_valid:
                 while True:  # Nested loop for CRUD operations inside Admin block
+                   
                     print("\nAdmin Options:")
                     print("1. Create User")
                     print("2. Display Users")
-                    print("3. Exit Admin Portal")
+                    print("3. Find by Id")
+                    print("4. Exit Admin Protal")
 
                     next_choice = input("Choose an option: ")
 
@@ -36,6 +38,8 @@ def main():
                     elif next_choice == "2":
                         AdminService.display_users()
                     elif next_choice == "3":
+                        AdminService.return_user_by_Id()
+                    elif next_choice == "4":
                         print("Exiting Admin Portal...")
                         break  # Exit the nested CRUD loop to go back to main loop
                     else:

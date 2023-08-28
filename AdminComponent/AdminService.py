@@ -1,6 +1,7 @@
 from UserComponent.UserModel import UserModel
 from Database.db_setup import Session  # Assuming Session is exposed from db_setup.py
-
+from sqlalchemy.orm.exc import NoResultFound
+from UtilityComponent.UtilityService import UtilityService
 class AdminService:
     
     def create_user():
@@ -27,6 +28,26 @@ class AdminService:
 
         
         print(all_users)
+    def return_user_by_Id():
+        session = Session()
+        try:
+            request_id = input("Enter ID to search for") # Gets ID 
+            UtilityService.removeAllSpaces(request_id) # Check for spaces. ID comming in
+            #if request_id:
+              #  convert_Id_To_Int = int(request_id) # I need to check if this could be converted
+            print(f"Request ID {request_id}")
+              #   int(x)
+          #  return True
+      #  except ValueError:
+         #   return False
+            
+           # UtilityService.can_be_integer(request_id) # Make sure this can be an integer. 
+            user = session.query(UserModel).filter_by(id=request_id).first()
+            if not user: 
+                raise NoResultFound(f"No user found with the id {request_id}")
+            return print(user.user_object())
+        except(NoResultFound) as e:
+            print(f"Error Message: {e}")
         
-    def delete_user_by_Id():
-        pass
+    
+    

@@ -6,8 +6,8 @@ from sqlalchemy.orm import sessionmaker
 from UserComponent.UserModel import Base
 
 DATABASE_URL = "sqlite:///./inventory.db"  # Example SQLite DB, adjust as needed
-
-engine = create_engine(DATABASE_URL, echo=True)
+ 
+engine = create_engine(DATABASE_URL, echo=False) #This will show logging for all SQL database
 
 # Create all tables
 def setup_db():
