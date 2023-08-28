@@ -1,5 +1,4 @@
 # Inventory-Management-System
-# Application Overview
 
 ## Admin Features
 - Can CRUD employees.
