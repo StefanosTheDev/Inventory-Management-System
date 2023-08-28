@@ -38,8 +38,8 @@ class AdminService:
             print(f"Request ID {request_id}")
               #   int(x)
           #  return True
-      #  except ValueError:
-         #   return False
+          #     except ValueError:
+          #   return False
             
            # UtilityService.can_be_integer(request_id) # Make sure this can be an integer. 
             user = session.query(UserModel).filter_by(id=request_id).first()
