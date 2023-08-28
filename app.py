@@ -54,7 +54,7 @@ def main():
             break  # Exit the main loop
 
         else:
-            print("Invalid choice. Please select again.")
+            print("Invalid choice. Please select again. #")
 
 if __name__ == "__main__":
     main()
