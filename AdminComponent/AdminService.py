@@ -30,36 +30,40 @@ class AdminService:
 
         
         print(all_users)
-    def get_user_input():
+    def handle_user_input():
         request_id = input("Enter ID to search for (or type 'exit' to quit): ")  # Gets ID
         if not request_id:
                 raise ValueError('Request Id is null')
         if request_id.lower() == 'exit':
-        return None  # Signal to the caller that the user wants to exit
-    parsedID = UtilityService.removeAllSpaces(request_id)  # Check for spaces. ID coming in
-    return int(parsedID)  # This will raise a ValueError if conversion fails
-
-def return_user_by_Id():
-    while True:
-        session = Session()
+            print('Exiting Program')
+            exit()  # Leave Program
+        parsedID = UtilityService.removeAllSpaces(request_id)  # Check for spaces. ID coming in
         try:
-            parsedID = get_user_input()
-            if parsedID is None:  # User wants to exit
-                break
-            
-            user = session.query(UserModel).filter_by(id=parsedID).first()  # database query
-            if not user:
-                raise NoResultFound(f"No user found with the id {parsedID}")
-            else:
-                print(user.user_object())
-                break  # Exit the loop
+            return int(parsedID)  # This will raise a ValueError if conversion fails
+        except ValueError:
+            print("Invalid ID format. Please enter a numeric ID.")
+            # Continues to the next iteration of the loop to prompt user again
 
-        except (NoResultFound, ValueError) as e:
-            print(f"Error Message: {e}")
-        except SQLAlchemyError as e:  # catch any SQLAlchemy related errors
-            print(f"Database Error: {e}")
-        finally:
-            session.close()  # close the session
+    def return_user_by_Id():
+        while True:
+            session = Session()
+            try:
+                parsedID = AdminService.handle_user_input()
+                if parsedID is None:  # User wants to exit
+                    break
+                user = session.query(UserModel).filter_by(id=parsedID).first()  # database query
+                if not user:
+                    raise NoResultFound(f"No user found with the id {parsedID}")
+                else:
+                    print(user.user_object())
+                    break  # Exit the loop
+
+            except (NoResultFound, ValueError) as e:
+                print(f"Error Message: {e}")
+            except SQLAlchemyError as e:  # catch any SQLAlchemy related errors
+                print(f"Database Error: {e}")
+            finally:
+                session.close()  # close the session
 
     
     
