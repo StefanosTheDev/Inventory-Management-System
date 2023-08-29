@@ -2,6 +2,8 @@ from UserComponent.UserModel import UserModel
 from Database.db_setup import Session  # Assuming Session is exposed from db_setup.py
 from sqlalchemy.orm.exc import NoResultFound
 from UtilityComponent.UtilityService import UtilityService
+from sqlalchemy.exc import SQLAlchemyError
+
 class AdminService:
     
     def create_user():
@@ -28,26 +30,36 @@ class AdminService:
 
         
         print(all_users)
-    def return_user_by_Id():
+    def get_user_input():
+        request_id = input("Enter ID to search for (or type 'exit' to quit): ")  # Gets ID
+        if not request_id:
+                raise ValueError('Request Id is null')
+        if request_id.lower() == 'exit':
+        return None  # Signal to the caller that the user wants to exit
+    parsedID = UtilityService.removeAllSpaces(request_id)  # Check for spaces. ID coming in
+    return int(parsedID)  # This will raise a ValueError if conversion fails
+
+def return_user_by_Id():
+    while True:
         session = Session()
         try:
-            request_id = input("Enter ID to search for") # Gets ID 
-            UtilityService.removeAllSpaces(request_id) # Check for spaces. ID comming in
-            #if request_id:
-              #  convert_Id_To_Int = int(request_id) # I need to check if this could be converted
-            print(f"Request ID {request_id}")
-              #   int(x)
-          #  return True
-          #     except ValueError:
-          #   return False
+            parsedID = get_user_input()
+            if parsedID is None:  # User wants to exit
+                break
             
-           # UtilityService.can_be_integer(request_id) # Make sure this can be an integer. 
-            user = session.query(UserModel).filter_by(id=request_id).first()
-            if not user: 
-                raise NoResultFound(f"No user found with the id {request_id}")
-            return print(user.user_object())
-        except(NoResultFound) as e:
+            user = session.query(UserModel).filter_by(id=parsedID).first()  # database query
+            if not user:
+                raise NoResultFound(f"No user found with the id {parsedID}")
+            else:
+                print(user.user_object())
+                break  # Exit the loop
+
+        except (NoResultFound, ValueError) as e:
             print(f"Error Message: {e}")
-        
+        except SQLAlchemyError as e:  # catch any SQLAlchemy related errors
+            print(f"Database Error: {e}")
+        finally:
+            session.close()  # close the session
+
     
     
