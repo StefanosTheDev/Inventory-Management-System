@@ -38,7 +38,7 @@ def main():
                     elif next_choice == "2":
                         AdminService.display_users()
                     elif next_choice == "3":
-                        AdminService.return_user_by_Id()
+                        AdminService.return_employee_by_Id()
                     elif next_choice == "4":
                         print("Exiting Admin Portal...")
                         break  # Exit the nested CRUD loop to go back to main loop
