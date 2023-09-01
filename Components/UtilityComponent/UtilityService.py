@@ -28,7 +28,7 @@ class UtilityService:
     def check_password(password):
         try:
             SPECIAL_CHARACHTERS = "!@#$%^&*"
-            if not 5 < len(password) > 15:
+            if len(password) <= 5 or len(password) > 16:
                 raise ValueError('Length Issue')
         
             has_upper = any(letter.isupper() for letter in password) # Returns True / False
@@ -43,9 +43,9 @@ class UtilityService:
                 raise ValueError("no Character")
         
             return True #
-        except Exception as e:
-            print(f"An error occurred: {e}")
-            return False
+        except ValueError as e:
+            print(e)
+            raise 
 
     def check_email_exist(email):
         try:
