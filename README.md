@@ -1,7 +1,7 @@
 # Inventory-Management-System
 
 ## Database Administrators (Portal)
-- Can CRUD employees.
+- Can CRUD employees. 
 - Manage the roles and access of the employees. (security)
 - Access to a variety of different functions to help provide data insight.. 
 - Assign Employees To Groups based off Role.
