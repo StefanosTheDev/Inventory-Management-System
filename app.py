@@ -1,6 +1,6 @@
 from Database.db_setup import setup_db, Session
-from UserComponent.UserModel import UserModel
-from AdminComponent.AdminService import AdminService
+from Components.UserComponent.UserModel import UserModel
+from Components.AdminComponent.AdminService import AdminService
 
 def main():
     print("Setting up the database...")
@@ -46,8 +46,15 @@ def main():
                         print("Invalid choice. Please select again.")
 
         elif choice == "Employee":
-            # Handle employee actions here
-            pass
+            if is_valid:
+                while True:  # Nested loop for CRUD operations inside Admin block
+                   
+                    print("\Employee Options:")
+                    print("1. View Inventory")
+                    print("2. Remove Product")
+                    print("3. Find by Id")
+                    print("4. AddProduct")
+                    print("4. Exit Employee Portal")
 
         elif choice.lower() == "exit":
             print("Exiting program...")
