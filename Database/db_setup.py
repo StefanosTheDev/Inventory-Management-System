@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 # Importing the Base from UserModel
-from UserComponent.UserModel import Base
+from Components.UserComponent.UserModel import Base
 
 DATABASE_URL = "sqlite:///./inventory.db"  # Example SQLite DB, adjust as needed
  
