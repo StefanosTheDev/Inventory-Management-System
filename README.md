@@ -6,7 +6,7 @@
 - Assign them to specific groups where they will have access to specific inventory parts..
 - Proper Authentication Register Login. (Creates Employees)
 - Can Modify Inventory Tables and their capabilites. (This why you have a real Data Base Administrator)
-## Employee Features
+## Employees + Admins once they login.
 - Can simple add to there respective Inventory Group like Adding Products. ( Any official Changes to the Table is an Admin)
 - Proper Authentication Login
 - Ability to manage the products within the Inventory as such.
