@@ -53,20 +53,20 @@ class UtilityService:
             v = validate_email(email)
         # replace with normalized form
             email = v["email"] 
-            print("True")
+            return True
         except EmailNotValidError as e:
         # email is not valid, exception message is human-readable
-            print(str(f"{e} ERror"))
-  
+            print(e)
+            raise
+    
     def Id_Req_Validation(request_id):
         if not request_id:
-                raise ValueError('Request Id is null')
-        if request_id.lower() == 'exit':
-            print('Exiting Program')
-            exit()  # Leave Program
-        parsedId = "".join(request_id.split())
+            raise ValueError('Request Id is null')
+    
+        parsedId = UtilityService.removeAllSpaces(request_id)
         try:
             return int(parsedId)  # This will raise a ValueError if conversion fails
         except ValueError:
-            print("Invalid ID format. Please enter a numeric ID.")
-            # Continues to the next iteration of the loop to prompt user again      
+            error_msg = "Invalid ID format. Please enter a numeric ID."
+            print(error_msg)
+            raise ValueError(error_msg)

@@ -2,7 +2,7 @@
 import pytest
 from unittest import mock
 from Components.UtilityComponent.UtilityService import UtilityService
-
+from email_validator import EmailNotValidError
 #removeAllSpaces()
 class Test_Remove_All_Spaces:
     def test_removeAllSpaces_simple_string(self):
@@ -74,4 +74,30 @@ class Test_Check_Password():
     def test_check_password_sucess_attempt(self):
         result = UtilityService.check_password('!Stefanos329')
         assert result == True
+
+class Test_check_email_exist():
+    def test_check_email_exist(self):
+        Email = UtilityService.check_email_exist('Stefanos26Sophocleous@gmail.com')
+        assert Email == True
+    def test_check_email_does_not_exist(self):
+        with pytest.raises(EmailNotValidError):
+            UtilityService.check_email_exist('invalid-email')
+    
+class Test_Id_Req_Validation():
+    def test_Id_Req_Validation_Id_Null(self):
+        with pytest.raises(ValueError, match="Request Id is null"):
+            UtilityService.Id_Req_Validation(None)
+            
+    def test_Id_Req_Validation_Invalid_Format(self):
+        with pytest.raises(ValueError, match="Invalid ID format. Please enter a numeric ID."):
+            UtilityService.Id_Req_Validation('s3213')
+            
+        with pytest.raises(ValueError, match="Invalid ID format. Please enter a numeric ID."):
+            UtilityService.Id_Req_Validation('!  f333 33')
+            
+    def test_Id_Req_Validation_Valid_Format(self):
+        foo = "3"
+        test_id = UtilityService.Id_Req_Validation(foo)
+        assert type(test_id) == int
+    
     
