@@ -19,11 +19,13 @@ class UtilityService:
             
             if not(has_upper and has_lower): 
                 raise ValueError("Issue here with casing")
-            return True
+            return username
         except ValueError as e:
             print(e)
             raise # re-raises the caught ValueError Is this best practice?
 
+    def check_role(role):
+        pass
     
     def check_password(password):
         try:
@@ -42,7 +44,7 @@ class UtilityService:
             if not any(char in SPECIAL_CHARACHTERS for char in password):
                 raise ValueError("no Character")
         
-            return True #
+            return password #
         except ValueError as e:
             print(e)
             raise 
@@ -53,7 +55,7 @@ class UtilityService:
             v = validate_email(email)
         # replace with normalized form
             email = v["email"] 
-            return True
+            return email
         except EmailNotValidError as e:
         # email is not valid, exception message is human-readable
             print(e)

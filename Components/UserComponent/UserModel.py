@@ -1,5 +1,4 @@
-# UserModel.py
-from sqlalchemy import Column, Integer, String, Sequence
+from sqlalchemy import Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
@@ -7,7 +6,7 @@ Base = declarative_base()
 class UserModel(Base):
     __tablename__ = 'users'
     
-    id = Column(Integer, Sequence('user_id_seq'), primary_key=True)
+    id = Column(Integer, primary_key=True)  # Simplified for auto-increment
     username = Column(String(50), unique=True, nullable=False)
     password = Column(String(100), nullable=False)  # Consider hashing the password!
     email = Column(String(100), unique=True, nullable=False)
@@ -20,4 +19,13 @@ class UserModel(Base):
         self.role = role
 
     def user_object(self):
-        return f"User ID: {self.id}, \nUsername: {self.username}, \nPassword: {self.password}, \nEmail: {self.email}, \nRole: {self.role}"
+         return {
+        'User_Information': {
+            'user_id': self.id,
+            'username': self.username,
+            'password': self.password,
+            'email': self.email
+            #'blogs': [blog.json() for blog in self.blog_id]
+        },
+        
+    }

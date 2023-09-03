@@ -38,6 +38,7 @@ class Test_Check_Username:
     def test_check_casing_upper_lower(self):
         with pytest.raises(ValueError, match="Issue here with casing"):
             UtilityService.check_username("AAAAAAA")
+            
     def test_check_casing_lower(self):
          with pytest.raises(ValueError, match="Issue here with casing"):
             UtilityService.check_username("aaaaaaaa")   
