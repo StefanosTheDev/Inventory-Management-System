@@ -75,4 +75,3 @@ def admin_login():
 @admin_blueprint.route('/admin/logout', methods=['POST'])
 def admin_logout():
     return AdminService.logout()
-
